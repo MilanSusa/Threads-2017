@@ -1,66 +1,74 @@
-/*
- * Created on May 28, 2017
- *
- */
 package music;
 
 public class Synchronizer {
-    
-    private boolean firstVoiceFlag;
 
-    public Synchronizer(boolean firstVoiceFlag) {
-        super();
-        this.firstVoiceFlag = firstVoiceFlag;
-    }
+	private int voiceFlag;
 
-    public Synchronizer() {
-    }
+	public Synchronizer(int voiceFlag) {
+		super();
+		this.voiceFlag = voiceFlag;
+	}
 
-    public synchronized void singFirstVoice(String lyrics1, int delay) {
-        while (!firstVoiceFlag) {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
-        singCurrent(lyrics1, delay);
-    }
+	public Synchronizer() {
+	}
 
-    public synchronized void singSecondVoice(String lyrics2, int delay) {
-        while (firstVoiceFlag) {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
-        singCurrent(lyrics2, delay);
-    }
+	public synchronized void singFirstVoice(String lyrics1, int delay) {
+		while (voiceFlag != 1) {
+			try {
+				wait();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		singCurrent(lyrics1, delay);
+	}
 
-    /**
-     * @param lyrics
-     */
-    private void singCurrent(String lyrics, int delay) {
-        try {
-            wait(delay);
-        } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        System.out.println(lyrics);
-        firstVoiceFlag = !firstVoiceFlag;
-        notifyAll();
-    }
-    
-    public boolean isFirstVoiceFlag() {
-        return firstVoiceFlag;
-    }
+	public synchronized void singSecondVoice(String lyrics2, int delay) {
+		while (voiceFlag != 2) {
+			try {
+				wait();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		singCurrent(lyrics2, delay);
+	}
 
-    public void setFirstVoiceFlag(boolean firstVoiceFlag) {
-        this.firstVoiceFlag = firstVoiceFlag;
-    }
-    
+	public synchronized void singThirdVoice(String lyrics3, int delay) {
+		while (voiceFlag != 3) {
+			try {
+				wait();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		singCurrent(lyrics3, delay);
+	}
+
+	/**
+	 * @param lyrics
+	 */
+	private void singCurrent(String lyrics, int delay) {
+		try {
+			wait(delay);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(lyrics);
+		voiceFlag = (voiceFlag % 3) + 1;
+		notifyAll();
+	}
+
+	public int getVoiceFlag() {
+		return voiceFlag;
+	}
+
+	public void setVoiceFlag(int voiceFlag) {
+		this.voiceFlag = voiceFlag;
+	}
+
 }
