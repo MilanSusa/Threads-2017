@@ -1,5 +1,10 @@
 package music;
 
+import java.awt.TextArea;
+
+import gui.ConcertGUI;
+import gui.GUIController;
+
 public class Synchronizer {
 
 	private int voiceFlag;
@@ -58,7 +63,7 @@ public class Synchronizer {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(lyrics);
+		GUIController.printText(lyrics);
 		voiceFlag = (voiceFlag % 3) + 1;
 		notifyAll();
 	}

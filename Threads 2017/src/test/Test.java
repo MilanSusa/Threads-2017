@@ -40,8 +40,9 @@ public class Test {
 		johnLennon.start();
 		paulMcCartney.start();
 		ringoStarr.start();
+	}
 
-		IN.nextLine();
+	public void stopSinging() {
 		johnLennon.setStopIt(true);
 		paulMcCartney.setStopIt(true);
 		ringoStarr.setStopIt(true);
