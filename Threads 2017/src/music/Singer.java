@@ -1,5 +1,7 @@
 package music;
 
+import gui.GUIController;
+
 public class Singer extends Thread {
 
 	private String singerName;
@@ -30,11 +32,14 @@ public class Singer extends Thread {
 	private synchronized void sing() {
 		while (!stopIt) {
 			if (voice == Voice.FIRST) {
-				synch.singFirstVoice(performance.getLyrics(), performance.getDelay());
+				synch.singFirstVoice(performance.getLyrics(), performance.getDelay(), GUIController.isEnabled1(),
+						GUIController.isEnabled2(), GUIController.isEnabled3());
 			} else if (voice == Voice.SECOND) {
-				synch.singSecondVoice(performance.getLyrics(), performance.getDelay());
-			} else {
-				synch.singThirdVoice(performance.getLyrics(), performance.getDelay());
+				synch.singSecondVoice(performance.getLyrics(), performance.getDelay(), GUIController.isEnabled1(),
+						GUIController.isEnabled2(), GUIController.isEnabled3());
+			} else if (voice == Voice.THIRD) {
+				synch.singThirdVoice(performance.getLyrics(), performance.getDelay(), GUIController.isEnabled1(),
+						GUIController.isEnabled2(), GUIController.isEnabled3());
 			}
 		}
 	}

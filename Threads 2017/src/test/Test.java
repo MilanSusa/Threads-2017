@@ -1,16 +1,12 @@
 package test;
 
-import java.util.Scanner;
 import java.util.Timer;
-
 import music.Performance;
 import music.Singer;
 import music.Synchronizer;
 import music.Voice;
 
 public class Test {
-
-	public static final Scanner IN = new Scanner(System.in);
 
 	private Singer johnLennon;
 	private Singer paulMcCartney;
@@ -21,9 +17,9 @@ public class Test {
 		String lyrics2 = '\t' + "Woke up, fell out of bed" + '\n' + '\t' + "..." + '\n';
 		String lyrics3 = "\t\t" + "Found my coat and grabbed my hat" + '\n' + "\t\t" + "..." + '\n';
 
-		Performance firstVoicePerformance = new Performance(lyrics1, 1500);
-		Performance secondVoicePerformance = new Performance(lyrics2, 1500);
-		Performance thirdVoicePerformance = new Performance(lyrics3, 1500);
+		Performance firstVoicePerformance = new Performance(lyrics1, 700);
+		Performance secondVoicePerformance = new Performance(lyrics2, 700);
+		Performance thirdVoicePerformance = new Performance(lyrics3, 700);
 
 		Synchronizer synch = new Synchronizer(1);
 		boolean stopIt = false;
@@ -34,15 +30,13 @@ public class Test {
 	}
 
 	public void testSingInThreads() {
-
 		initializeSingingInThreads();
-
 		johnLennon.start();
 		paulMcCartney.start();
 		ringoStarr.start();
 	}
 
-	public void stopSinging() {
+	public void stopConcert() {
 		johnLennon.setStopIt(true);
 		paulMcCartney.setStopIt(true);
 		ringoStarr.setStopIt(true);

@@ -7,7 +7,7 @@ import test.Test;
 public class GUIController {
 
 	private static Test t;
-	private static ConcertGUI concertGUI;
+	public static ConcertGUI concertGUI;
 
 	/**
 	 * Launch the application.
@@ -26,16 +26,27 @@ public class GUIController {
 		});
 	}
 
-	public static void startSinging() {
+	public static void startConcert() {
 		t.testSingInThreads();
+	}
+
+	public static void stopConcert() {
+		t.stopConcert();
 	}
 
 	public static void printText(String lyrics) {
 		concertGUI.getTextArea().setText(concertGUI.getTextArea().getText() + lyrics);
 	}
 
-	public static void stopSinging() {
-		t.stopSinging();
+	public static boolean isEnabled1() {
+		return concertGUI.getBtnStop1().isEnabled();
 	}
 
+	public static boolean isEnabled2() {
+		return concertGUI.getBtnStop2().isEnabled();
+	}
+
+	public static boolean isEnabled3() {
+		return concertGUI.getBtnStop3().isEnabled();
+	}
 }
